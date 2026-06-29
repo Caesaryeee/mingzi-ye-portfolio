@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vercel/
+qa/
+design-qa.md
+*.bat
+*.log
+.DS_Store
+Thumbs.db
