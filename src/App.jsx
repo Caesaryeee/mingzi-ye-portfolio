@@ -19,7 +19,8 @@ import {
 
 const portfolioUrl =
   'https://drive.google.com/drive/folders/1MuJUFZqs1YFckr0sgPDcskDxLzOPPNdy?usp=sharing'
-const resumeUrl = '/assets/resume-mingzi-ye.pdf'
+const assetUrl = (path) => `${import.meta.env.BASE_URL}${path}`
+const resumeUrl = assetUrl('assets/resume-mingzi-ye.pdf')
 const email = 'ye.mingz@northeastern.edu'
 const linkedinUrl = 'https://www.linkedin.com/in/MingziYe'
 
@@ -37,7 +38,7 @@ const projects = [
     role: 'Producer / Shooter / Editor',
     tools: ['Sony FX3', 'Interior lighting', 'DaVinci Resolve'],
     duration: '01:28',
-    image: '/assets/architecture-overhead.jpg',
+    image: assetUrl('assets/architecture-overhead.jpg'),
     accent: 'blue',
   },
   {
@@ -51,7 +52,7 @@ const projects = [
     role: 'Commercial Director',
     tools: ['Campaign concept', 'Shoot direction', 'Social edit'],
     duration: '00:45',
-    image: '/assets/commercial-me7.jpg',
+    image: assetUrl('assets/commercial-me7.jpg'),
     accent: 'coral',
   },
   {
@@ -65,7 +66,7 @@ const projects = [
     role: 'Motion Designer / Editor',
     tools: ['After Effects', 'Figma', 'Pitch video'],
     duration: '00:37',
-    image: '/assets/motion-lensfix.jpg',
+    image: assetUrl('assets/motion-lensfix.jpg'),
     accent: 'yellow',
   },
   {
@@ -79,7 +80,7 @@ const projects = [
     role: 'Producer / Editor',
     tools: ['Story structure', 'Field production', 'Sound mix'],
     duration: '04:12',
-    image: '/assets/documentary-chaoshan.jpg',
+    image: assetUrl('assets/documentary-chaoshan.jpg'),
     accent: 'green',
   },
 ]
@@ -172,24 +173,33 @@ function HeroCollage() {
       transition={{ duration: 0.8, delay: 0.1 }}
     >
       <div className="hero-card hero-card-monitor">
-        <img src="/assets/motion-lensfix.jpg" alt="Motion graphics frame from Lens Fix+ project" />
+        <img
+          src={assetUrl('assets/motion-lensfix.jpg')}
+          alt="Motion graphics frame from Lens Fix+ project"
+        />
         <Label tone="red">shoot</Label>
         <span className="timecode">00:00:24:18</span>
       </div>
 
       <div className="hero-card hero-card-main">
-        <img src="/assets/architecture-hero.jpg" alt="Bright architectural interior video still" />
+        <img
+          src={assetUrl('assets/architecture-hero.jpg')}
+          alt="Bright architectural interior video still"
+        />
         <Label tone="blue">architectural</Label>
         <span className="timecode">00:00:11:07</span>
       </div>
 
       <div className="hero-card hero-card-edit">
-        <img src="/assets/architecture-detail.jpg" alt="Interior detail frame from home tour" />
+        <img
+          src={assetUrl('assets/architecture-detail.jpg')}
+          alt="Interior detail frame from home tour"
+        />
         <Label tone="red">edit</Label>
       </div>
 
       <div className="hero-card hero-card-small">
-        <img src="/assets/architecture-overhead.jpg" alt="Overhead interior frame" />
+        <img src={assetUrl('assets/architecture-overhead.jpg')} alt="Overhead interior frame" />
         <Label tone="yellow">design-driven</Label>
       </div>
 
@@ -422,7 +432,7 @@ function App() {
         </div>
         <img
           className="contact-image"
-          src="/assets/architecture-detail.jpg"
+          src={assetUrl('assets/architecture-detail.jpg')}
           alt="Bright architectural interior used as portfolio closing still"
         />
       </section>
