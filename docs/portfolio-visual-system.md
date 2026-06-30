@@ -75,3 +75,11 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 - Rule added: mobile category controls should use a visible multi-row layout instead of a hidden horizontal scroll rail.
 - Verification evidence: `qa/mobile-category-2026-06-30/mobile-work.png`, `mobile-full.png`.
 - QA status: 390px mobile check passed with 8 visible category buttons before the first project card, no horizontal overflow, no console errors, and no CJK DOM text.
+
+### 2026-06-30 - PChouse architecture sample expansion
+
+- Intent: add all top-level PChouse interior samples to the Architecture category and fix the incorrect Suzhou preview source.
+- Areas: Architecture work browser entries, PChouse web clips, JPG posters, source filename mapping.
+- Asset record: `docs/pchouse-architecture-assets.md`.
+- Rule reinforced: portfolio media assets need a traceable source file, English asset name, selected start time, and QA evidence.
+- QA status: Architecture category passed at 9 cards on desktop and mobile; all 8 generated PChouse clips and posters exist; each generated web clip is 5.5 seconds.
