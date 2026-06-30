@@ -60,6 +60,14 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 
 ## Change Log
 
+### 2026-06-30 - Hero collage declutter and truthful duration badges
+
+- Intent: make the desktop hero right side read as a clearer editorial video stage, remove the duplicated Architecture 04 sample, and replace decorative/random timecodes with real MP4 durations.
+- Areas: hero collage decorative layers, removed timeline card, video duration badges, Architecture work browser entries, PChouse asset map, architecture hero preview crop.
+- Rules added: decorative paper or sticker elements may not cover a showcase video; hero metadata labels must either clarify the reel structure or be removed; video corner time badges must use measured MP4 duration in `M:SS`; duplicate project samples should stay in source records but not appear in the live work browser; hero videos should avoid embedded subtitle text when used as visual background.
+- Verification evidence: `qa/hero-declutter-2026-06-30/desktop-hero.png`, `desktop-architecture.png`, `mobile-architecture.png`.
+- QA status: local Chrome QA passed; no hero sticker/timeline card; no desktop or mobile horizontal overflow; Architecture category has 8 cards; Beijing duplicate is absent; hero durations show `0:07`; Architecture durations show `0:07` then seven `0:06` badges; no console errors.
+
 ### 2026-06-30 - Hero stage and colorful work numbering
 
 - Intent: fix desktop hero clutter and restore the lively color rhythm from the reference image.
@@ -82,4 +90,4 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 - Areas: Architecture work browser entries, PChouse web clips, JPG posters, source filename mapping.
 - Asset record: `docs/pchouse-architecture-assets.md`.
 - Rule reinforced: portfolio media assets need a traceable source file, English asset name, selected start time, and QA evidence.
-- QA status: Architecture category passed at 9 cards on desktop and mobile; all 8 generated PChouse clips and posters exist; each generated web clip is 5.5 seconds.
+- QA status: Architecture category passed at 8 cards on desktop and mobile after excluding the duplicate 04 sample; 7 live PChouse archive clips plus the featured architecture reel remain active.

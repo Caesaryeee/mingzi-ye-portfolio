@@ -18,12 +18,13 @@ The original Chinese source files were not renamed or modified. The English copy
 
 ## Web Clips
 
-All web clips are silent H.264 MP4 previews generated at 960px width, about 5.5 seconds long, with matching JPG posters in `public/assets`.
+Live web clips are silent H.264 MP4 previews generated at 960px width, about 5.5 seconds long, with matching JPG posters in `public/assets`.
+
+`beijing-sun-jiajing-final.mp4` is retained in the English filename source copy, but it is excluded from the live Architecture category because it duplicates the featured 01 home-tour sample.
 
 | Portfolio title | English source copy | Web clip | Poster | Start time | Notes |
 | --- | --- | --- | --- | --- | --- |
 | Suzhou Residential Walkthrough | `suzhou-li-yaqin-building-26-no-subtitles.mp4` | `archive-home-suzhou.mp4` | `archive-home-suzhou.jpg` | `00:01:40.0` | Replaces the previous wrong Suzhou clip. |
-| Beijing Sun Jiajing Home Tour | `beijing-sun-jiajing-final.mp4` | `archive-home-beijing-sun-jiajing.mp4` | `archive-home-beijing-sun-jiajing.jpg` | `00:01:40.0` | Bright, smooth residential walkthrough. |
 | Nature Zhou Zijian Home Tour | `nature-zhou-zijian.mp4` | `archive-home-nature-zhou-zijian.mp4` | `archive-home-nature-zhou-zijian.jpg` | `00:01:40.0` | Warm interior movement across living spaces. |
 | Nature Dali Monk Design Home Tour | `nature-dali-monk-design.mp4` | `archive-home-nature-dali-monk-design.mp4` | `archive-home-nature-dali-monk-design.jpg` | `00:01:00.0` | Cleaner section selected after avoiding title overlay. |
 | Nature Li Youyou Apartment Tour | `nature-li-youyou.mp4` | `archive-home-nature-li-youyou.mp4` | `archive-home-nature-li-youyou.jpg` | `00:01:00.0` | Cleaner table and hallway movement selected after avoiding presenter-heavy section. |

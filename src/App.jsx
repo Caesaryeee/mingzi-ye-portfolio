@@ -23,6 +23,29 @@ const assetUrl = (path) => `${import.meta.env.BASE_URL}${path}`
 const resumeUrl = assetUrl('assets/resume-mingzi-ye.pdf')
 const email = 'ye.mingz@northeastern.edu'
 const linkedinUrl = 'https://www.linkedin.com/in/MingziYe'
+const videoDurations = {
+  [assetUrl('assets/archive-doc-guangcai.mp4')]: '0:04',
+  [assetUrl('assets/archive-doc-portrait.mp4')]: '0:04',
+  [assetUrl('assets/archive-drone-city.mp4')]: '0:04',
+  [assetUrl('assets/archive-drone-harbor.mp4')]: '0:04',
+  [assetUrl('assets/archive-event-nansha.mp4')]: '0:04',
+  [assetUrl('assets/archive-home-chengdu-qingyu-design-studio.mp4')]: '0:06',
+  [assetUrl('assets/archive-home-fotile.mp4')]: '0:06',
+  [assetUrl('assets/archive-home-nature-dali-monk-design.mp4')]: '0:06',
+  [assetUrl('assets/archive-home-nature-li-youyou.mp4')]: '0:06',
+  [assetUrl('assets/archive-home-nature-wuhan-chengjun.mp4')]: '0:06',
+  [assetUrl('assets/archive-home-nature-zhou-zijian.mp4')]: '0:06',
+  [assetUrl('assets/archive-home-suzhou.mp4')]: '0:06',
+  [assetUrl('assets/archive-mg-brand.mp4')]: '0:04',
+  [assetUrl('assets/archive-mg-credit-card.mp4')]: '0:04',
+  [assetUrl('assets/archive-promo-guangzhou.mp4')]: '0:04',
+  [assetUrl('assets/archive-tvc-me7.mp4')]: '0:04',
+  [assetUrl('assets/archive-tvc-xpeng.mp4')]: '0:04',
+  [assetUrl('assets/preview-architecture-home-tour.mp4')]: '0:07',
+  [assetUrl('assets/preview-documentary-chaoshan.mp4')]: '0:07',
+  [assetUrl('assets/preview-food-photography.mp4')]: '0:07',
+  [assetUrl('assets/preview-motion-lensfix.mp4')]: '0:07',
+}
 
 const categories = [
   {
@@ -105,7 +128,6 @@ const workItems = [
       'High-end home tour production focused on light, material, room flow, and smooth camera movement for visually demanding interiors.',
     role: 'Producer / Shooter / Editor',
     tools: ['Sony FX3', 'Interior lighting', 'DaVinci Resolve'],
-    timecode: '00:01:08:16',
     format: '16:9 portfolio film',
     client: 'PChouse',
     image: assetUrl('assets/architecture-overhead.jpg'),
@@ -125,7 +147,6 @@ const workItems = [
       'Motion-led visual packaging that turns a technical AR repair concept into a readable pitch video with clean pacing and UI rhythm.',
     role: 'Motion Designer / Editor',
     tools: ['After Effects', 'Figma', 'Pitch video'],
-    timecode: '00:00:24:18',
     format: 'MG / explainer',
     client: 'AR concept',
     image: assetUrl('assets/motion-lensfix.jpg'),
@@ -145,7 +166,6 @@ const workItems = [
       'Narrative documentary work grounded in people, place, food culture, field production, story structure, and observed detail.',
     role: 'Producer / Editor',
     tools: ['Story structure', 'Field production', 'Sound mix'],
-    timecode: '00:04:12:08',
     format: 'Documentary short',
     client: 'Culture story',
     image: assetUrl('assets/documentary-chaoshan.jpg'),
@@ -165,7 +185,6 @@ const workItems = [
       'Atmospheric aerial footage using movement, scale, and night lighting to establish location and cinematic energy.',
     role: 'Aerial Footage',
     tools: ['Drone montage', 'Night city texture', 'Location footage'],
-    timecode: '00:00:12:04',
     format: 'Drone montage',
     client: 'Drone reel',
     image: assetUrl('assets/archive-drone-harbor.jpg'),
@@ -185,7 +204,6 @@ const workItems = [
       'Automotive commercial work shaped around product detail, driver experience, and polished campaign pacing.',
     role: 'Director / Editor',
     tools: ['Commercial direction', 'Automotive detail', 'Final edit'],
-    timecode: '00:00:18:12',
     format: 'Automotive TVC',
     client: 'ME7 SUV',
     image: assetUrl('assets/archive-tvc-me7.jpg'),
@@ -205,7 +223,6 @@ const workItems = [
       'Public-facing promotional film work combining city texture, event rhythm, and polished institutional storytelling.',
     role: 'Producer / Editor',
     tools: ['City promo', 'Editorial structure', 'Delivery'],
-    timecode: '00:02:30:08',
     format: 'City promo',
     client: 'Guangzhou',
     image: assetUrl('assets/archive-promo-guangzhou.jpg'),
@@ -225,7 +242,6 @@ const workItems = [
       'A local restaurant still-photo set built around sushi, ramen, dark-table contrast, clean garnish detail, and menu-ready crops.',
     role: 'Photographer / Retoucher',
     tools: ['Panasonic G9M2', 'Food lighting', 'Color control'],
-    timecode: 'STILL / 0522',
     format: 'Menu + social stills',
     client: 'Kung Fu Kitchen',
     image: assetUrl('assets/food-ramen-three-bowls.jpg'),
@@ -256,18 +272,6 @@ const workItems = [
     client: 'PChouse',
     image: assetUrl('assets/archive-home-suzhou.jpg'),
     video: assetUrl('assets/archive-home-suzhou.mp4'),
-    accent: 'blue',
-  },
-  {
-    id: 'beijing-sun-jiajing-home-tour',
-    categoryId: 'architecture',
-    category: 'Architecture',
-    title: 'Beijing Sun Jiajing Home Tour',
-    format: 'Residential walkthrough',
-    role: 'Camera / Edit',
-    client: 'PChouse',
-    image: assetUrl('assets/archive-home-beijing-sun-jiajing.jpg'),
-    video: assetUrl('assets/archive-home-beijing-sun-jiajing.mp4'),
     accent: 'blue',
   },
   {
@@ -622,6 +626,14 @@ function MediaSurface({ video, image, alt, eager = false, posterLoading }) {
   )
 }
 
+function DurationBadge({ video, className = 'timecode' }) {
+  const duration = videoDurations[video]
+
+  if (!duration) return null
+
+  return <span className={className}>{duration}</span>
+}
+
 function HeroCard({
   className,
   image,
@@ -629,7 +641,6 @@ function HeroCard({
   alt,
   label,
   tone,
-  timecode,
   previewLabel = 'Live preview',
   eager = false,
 }) {
@@ -642,7 +653,7 @@ function HeroCard({
         <i aria-hidden="true" />
         {previewLabel}
       </span>
-      {timecode ? <span className="timecode">{timecode}</span> : null}
+      <DurationBadge video={video} />
       <span className="video-progress" aria-hidden="true" />
     </div>
   )
@@ -674,7 +685,6 @@ function HeroCollage() {
         alt="Bright architectural interior video still"
         label="home tour"
         tone="blue"
-        timecode="00:01:08:16"
         eager
       />
 
@@ -685,7 +695,6 @@ function HeroCollage() {
         alt="Lens Fix motion graphics preview playing on a phone interface"
         label="motion"
         tone="yellow"
-        timecode="00:00:24:18"
         previewLabel="MG preview"
         eager
       />
@@ -697,7 +706,6 @@ function HeroCollage() {
         alt="Documentary production preview with close-up food preparation"
         label="doc cut"
         tone="green"
-        timecode="00:00:31:12"
         previewLabel="Field footage"
         eager
       />
@@ -711,21 +719,6 @@ function HeroCollage() {
         tone="red"
         previewLabel="Photo motion"
       />
-
-      <div className="edit-console" aria-label="Editing workflow labels">
-        <span className="console-top">ACTIVE TIMELINE</span>
-        <strong>Cut / Grade / Deliver</strong>
-        <div className="console-bars" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </div>
-        <span className="console-code">BOS_PROD_05</span>
-      </div>
-
-      <div className="sticker-frame" aria-hidden="true">
-        <img src={assetUrl('assets/ai-cutboard-sticker-pack.png')} alt="" />
-      </div>
 
       <a className="play-reel" href={portfolioUrl} target="_blank" rel="noreferrer">
         <Play size={15} weight="fill" aria-hidden="true" />
@@ -777,7 +770,7 @@ function ProjectRow({ project, displayNumber }) {
           <i aria-hidden="true" />
           {project.previewBadge}
         </span>
-        <span className="project-time">{project.timecode}</span>
+        <DurationBadge video={project.video} className="project-time" />
         <span className="play-overlay" aria-hidden="true">
           <Play size={18} weight="fill" />
         </span>
@@ -805,7 +798,7 @@ function ArchiveCard({ item, displayNumber }) {
         />
         <span className="video-vignette" aria-hidden="true" />
         <span className="archive-index">{displayNumber}</span>
-        <span className="archive-year">{item.client}</span>
+        <DurationBadge video={item.video} className="archive-duration" />
         <span className="archive-play" aria-hidden="true">
           <Play size={13} weight="fill" />
         </span>
@@ -814,6 +807,7 @@ function ArchiveCard({ item, displayNumber }) {
         <span>{item.category}</span>
         <h3>{item.title}</h3>
         <div>
+          <small>{item.client}</small>
           <small>{item.format}</small>
           <small>{item.role}</small>
         </div>
