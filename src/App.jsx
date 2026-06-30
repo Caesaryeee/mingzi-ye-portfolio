@@ -31,7 +31,7 @@ const categories = [
     headline: 'Featured cuts',
     description:
       'One strongest representative from each production category, selected for a fast scan of range, taste, and execution.',
-    accent: 'ink',
+    accent: 'blue',
   },
   {
     id: 'architecture',
@@ -63,7 +63,7 @@ const categories = [
     headline: 'Drone footage',
     description:
       'Aerial movement, city texture, night harbor atmosphere, and location-establishing production footage.',
-    accent: 'ink',
+    accent: 'red',
   },
   {
     id: 'commercial',
@@ -87,7 +87,7 @@ const categories = [
     headline: 'Food photography',
     description:
       'Restaurant stills and animated previews for menu, social, and local business content.',
-    accent: 'red',
+    accent: 'yellow',
   },
 ]
 
@@ -171,7 +171,7 @@ const workItems = [
     image: assetUrl('assets/archive-drone-harbor.jpg'),
     video: assetUrl('assets/archive-drone-harbor.mp4'),
     previewBadge: 'Aerial loop',
-    accent: 'ink',
+    accent: 'red',
     featured: true,
   },
   {
@@ -231,7 +231,7 @@ const workItems = [
     image: assetUrl('assets/food-ramen-three-bowls.jpg'),
     video: assetUrl('assets/preview-food-photography.mp4'),
     previewBadge: 'Animated stills',
-    accent: 'red',
+    accent: 'yellow',
     featured: true,
   },
   {
@@ -328,7 +328,7 @@ const workItems = [
     client: 'Drone reel',
     image: assetUrl('assets/archive-drone-city.jpg'),
     video: assetUrl('assets/archive-drone-city.mp4'),
-    accent: 'ink',
+    accent: 'red',
   },
   {
     id: 'nansha-film-forum',
@@ -405,34 +405,37 @@ const experience = [
 ]
 
 const workContainerVariants = {
-  hidden: { opacity: 0, x: 26, scale: 0.985, filter: 'blur(6px)' },
+  hidden: { opacity: 0, x: 32, scale: 0.985, rotate: -0.35, filter: 'blur(7px)' },
   visible: {
     opacity: 1,
     x: 0,
     scale: 1,
+    rotate: 0,
     filter: 'blur(0px)',
     transition: {
-      duration: 0.34,
+      duration: 0.38,
       ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.055,
+      staggerChildren: 0.06,
     },
   },
   exit: {
     opacity: 0,
-    x: -22,
+    x: -26,
     scale: 0.99,
+    rotate: 0.25,
     filter: 'blur(5px)',
     transition: { duration: 0.18, ease: [0.4, 0, 1, 1] },
   },
 }
 
 const workItemVariants = {
-  hidden: { opacity: 0, y: 18, rotate: -0.35 },
+  hidden: { opacity: 0, y: 22, rotate: -0.6, scale: 0.985 },
   visible: {
     opacity: 1,
     y: 0,
     rotate: 0,
-    transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] },
+    scale: 1,
+    transition: { duration: 0.36, ease: [0.22, 1, 0.36, 1] },
   },
 }
 
@@ -895,7 +898,17 @@ function App() {
                   aria-pressed={activeCategory === category.id}
                 >
                   <span>{category.label}</span>
-                  <small>{categoryCounts[category.id] || 0}</small>
+                  <motion.small
+                    initial={false}
+                    animate={
+                      activeCategory === category.id
+                        ? { scale: [1, 1.22, 1], rotate: [0, -4, 0] }
+                        : { scale: 1, rotate: 0 }
+                    }
+                    transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {categoryCounts[category.id] || 0}
+                  </motion.small>
                 </button>
               ))}
             </div>
