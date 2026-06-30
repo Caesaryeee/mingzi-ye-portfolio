@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -46,6 +46,8 @@ const projects = [
     timecode: '00:01:08:16',
     format: '16:9 portfolio film',
     image: assetUrl('assets/architecture-overhead.jpg'),
+    video: assetUrl('assets/preview-architecture-home-tour.mp4'),
+    previewBadge: 'Live loop',
     accent: 'blue',
   },
   {
@@ -61,6 +63,8 @@ const projects = [
     timecode: '00:00:24:18',
     format: 'MG / explainer',
     image: assetUrl('assets/motion-lensfix.jpg'),
+    video: assetUrl('assets/preview-motion-lensfix.mp4'),
+    previewBadge: 'Motion preview',
     accent: 'yellow',
   },
   {
@@ -76,6 +80,8 @@ const projects = [
     timecode: '00:04:12:08',
     format: 'Documentary short',
     image: assetUrl('assets/documentary-chaoshan.jpg'),
+    video: assetUrl('assets/preview-documentary-chaoshan.mp4'),
+    previewBadge: 'Scene preview',
     accent: 'green',
   },
   {
@@ -91,6 +97,8 @@ const projects = [
     timecode: 'STILL / 0522',
     format: 'Menu + social stills',
     image: assetUrl('assets/food-ramen-three-bowls.jpg'),
+    video: assetUrl('assets/preview-food-photography.mp4'),
+    previewBadge: 'Animated stills',
     accent: 'red',
   },
 ]
@@ -174,12 +182,79 @@ function Label({ children, tone = 'blue' }) {
   return <span className={`cut-label label-${tone}`}>{children}</span>
 }
 
-function HeroCard({ className, image, alt, label, tone, timecode }) {
+function MediaSurface({ video, image, alt }) {
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    if (!video || typeof window === 'undefined') return undefined
+
+    const videoEl = videoRef.current
+    if (!videoEl) return undefined
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      videoEl.pause()
+      return undefined
+    }
+
+    videoEl.muted = true
+    const playVideo = () => {
+      videoEl.play().catch(() => {
+        // Some browsers delay muted autoplay until the preview is close to view.
+      })
+    }
+
+    const observer =
+      'IntersectionObserver' in window
+        ? new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting) {
+                playVideo()
+              } else {
+                videoEl.pause()
+              }
+            },
+            { rootMargin: '180px 0px', threshold: 0.05 },
+          )
+        : null
+
+    observer?.observe(videoEl)
+    playVideo()
+
+    return () => observer?.disconnect()
+  }, [video])
+
+  if (video) {
+    return (
+      <video
+        ref={videoRef}
+        src={video}
+        poster={image}
+        muted
+        loop
+        autoPlay
+        playsInline
+        preload="metadata"
+        aria-label={alt}
+      />
+    )
+  }
+
+  return <img src={image} alt={alt} />
+}
+
+function HeroCard({ className, image, video, alt, label, tone, timecode, previewLabel = 'Live preview' }) {
   return (
     <div className={`hero-card ${className}`}>
-      <img src={image} alt={alt} />
+      <MediaSurface video={video} image={image} alt={alt} />
+      <span className="video-vignette" aria-hidden="true" />
       <Label tone={tone}>{label}</Label>
+      <span className="live-preview">
+        <i aria-hidden="true" />
+        {previewLabel}
+      </span>
       {timecode ? <span className="timecode">{timecode}</span> : null}
+      <span className="video-progress" aria-hidden="true" />
     </div>
   )
 }
@@ -206,36 +281,43 @@ function HeroCollage() {
       <HeroCard
         className="hero-card-main"
         image={assetUrl('assets/architecture-hero.jpg')}
+        video={assetUrl('assets/preview-architecture-home-tour.mp4')}
         alt="Bright architectural interior video still"
-        label="real estate"
+        label="home tour"
         tone="blue"
         timecode="00:01:08:16"
       />
 
       <HeroCard
         className="hero-card-monitor"
-        image={assetUrl('assets/architecture-detail.jpg')}
-        alt="Architectural detail frame from home tour production"
-        label="shoot"
-        tone="red"
+        image={assetUrl('assets/motion-lensfix.jpg')}
+        video={assetUrl('assets/preview-motion-lensfix.mp4')}
+        alt="Lens Fix motion graphics preview playing on a phone interface"
+        label="motion"
+        tone="yellow"
         timecode="00:00:24:18"
+        previewLabel="MG preview"
       />
 
       <HeroCard
         className="hero-card-edit"
-        image={assetUrl('assets/edit-timeline-ae.jpg')}
-        alt="After Effects editing timeline for Lens Fix motion graphics"
-        label="edit"
-        tone="red"
+        image={assetUrl('assets/documentary-chaoshan.jpg')}
+        video={assetUrl('assets/preview-documentary-chaoshan.mp4')}
+        alt="Documentary production preview with close-up food preparation"
+        label="doc cut"
+        tone="green"
         timecode="00:00:31:12"
+        previewLabel="Field footage"
       />
 
       <HeroCard
         className="hero-card-support"
-        image={assetUrl('assets/architecture-detail.jpg')}
-        alt="Bright architectural detail still"
-        label="design-driven"
-        tone="yellow"
+        image={assetUrl('assets/food-ramen-three-bowls.jpg')}
+        video={assetUrl('assets/preview-food-photography.mp4')}
+        alt="Animated food photography preview for local restaurant content"
+        label="food stills"
+        tone="red"
+        previewLabel="Photo motion"
       />
 
       <div className="edit-console" aria-label="Editing workflow labels">
@@ -292,7 +374,16 @@ function ProjectRow({ project }) {
       </div>
 
       <div className="project-media">
-        <img src={project.image} alt={`${project.title} project still`} />
+        <MediaSurface
+          video={project.video}
+          image={project.image}
+          alt={`${project.title} moving project preview`}
+        />
+        <span className="video-vignette" aria-hidden="true" />
+        <span className="media-status">
+          <i aria-hidden="true" />
+          {project.previewBadge}
+        </span>
         <span className="project-time">{project.timecode}</span>
         <span className="play-overlay" aria-hidden="true">
           <Play size={18} weight="fill" />
@@ -510,11 +601,13 @@ function App() {
             </div>
           </div>
           <div className="contact-media">
-            <img
-              src={assetUrl('assets/architecture-detail.jpg')}
-              alt="Architectural detail still used as a portfolio closing image"
+            <MediaSurface
+              video={assetUrl('assets/preview-architecture-home-tour.mp4')}
+              image={assetUrl('assets/architecture-detail.jpg')}
+              alt="Looping architectural home tour preview used as a portfolio closing image"
             />
-            <span>Boston video producer / editor</span>
+            <span className="video-vignette" aria-hidden="true" />
+            <span className="contact-badge">Boston video producer / editor</span>
           </div>
         </section>
       </main>
