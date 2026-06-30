@@ -26,88 +26,72 @@ const linkedinUrl = 'https://www.linkedin.com/in/MingziYe'
 
 const filters = [
   'All',
-  'Restaurant Social Media Content',
-  'Real Estate Photo/Video/Drone',
+  'Architectural & Home Tour Videos',
+  'Motion Graphics (MG) Animations',
+  'Documentary Production',
   'Food Photography',
-  'Commercial Video',
-  'Short-form Reels',
 ]
 
 const projects = [
   {
     id: '01',
-    category: 'Restaurant Social Media Content',
-    title: 'Kung Fu Kitchen Launch Reels',
-    eyebrow: 'Restaurant social',
-    location: 'Boston-area content package',
-    description:
-      'Menu-first vertical content with tight food texture, fast cuts, and platform-ready hooks for a local restaurant rollout.',
-    role: 'Shooter / Editor / Content Creator',
-    tools: ['Panasonic G9M2', 'Food lighting', 'Reels edit'],
-    timecode: '00:00:13:08',
-    format: '9:16 / 4:5 cutdowns',
-    image: assetUrl('assets/restaurant-sushi-crunch-roll.jpg'),
-    accent: 'red',
-  },
-  {
-    id: '02',
-    category: 'Real Estate Photo/Video/Drone',
+    category: 'Architectural & Home Tour Videos',
     title: 'Editorial Home Tour Package',
-    eyebrow: 'Real estate video',
-    location: 'Interior + aerial coverage',
+    eyebrow: 'Architectural & home tour',
+    location: 'PChouse / home tour reel',
     description:
-      'A home-tour language built around light, material, room flow, and clean camera movement for premium property storytelling.',
+      'High-end home tour production focused on light, material, room flow, and smooth camera movement for visually demanding interiors.',
     role: 'Producer / Shooter / Editor',
-    tools: ['Sony FX3', 'DJI Mavic 3 Pro', 'DaVinci Resolve'],
+    tools: ['Sony FX3', 'Interior lighting', 'DaVinci Resolve'],
     timecode: '00:01:08:16',
-    format: '16:9 hero film',
+    format: '16:9 portfolio film',
     image: assetUrl('assets/architecture-overhead.jpg'),
     accent: 'blue',
   },
   {
-    id: '03',
-    category: 'Food Photography',
-    title: 'Ramen Menu Photo System',
-    eyebrow: 'Food photography',
-    location: 'Menu + social stills',
-    description:
-      'Controlled tabletop lighting and color cleanup that keeps broth, garnish, rice, and texture appetizing without heavy filters.',
-    role: 'Photographer / Retoucher',
-    tools: ['Tabletop lighting', 'Color control', 'Export sets'],
-    timecode: 'STILL / 0522',
-    format: '16:9 / square crops',
-    image: assetUrl('assets/food-ramen-white-broth.jpg'),
-    accent: 'yellow',
-  },
-  {
-    id: '04',
-    category: 'Commercial Video',
-    title: 'Automotive Product Campaign',
-    eyebrow: 'Commercial video',
-    location: 'Mobile-first campaign',
-    description:
-      'Short branded product films designed for fast platform rhythm, clear product presence, and campaign consistency.',
-    role: 'Commercial Director',
-    tools: ['Campaign concept', 'Shoot direction', 'Social edit'],
-    timecode: '00:00:45:02',
-    format: 'TVC + social cutdowns',
-    image: assetUrl('assets/commercial-me7.jpg'),
-    accent: 'green',
-  },
-  {
-    id: '05',
-    category: 'Short-form Reels',
+    id: '02',
+    category: 'Motion Graphics (MG) Animations',
     title: 'Lens Fix+ Motion Promo',
-    eyebrow: 'Motion / reels',
-    location: 'UI + AR concept',
+    eyebrow: 'MG animation',
+    location: 'UI / AR concept',
     description:
-      'Motion-led explainers and punchy UI edits that turn technical ideas into readable short-form product stories.',
+      'Motion-led visual packaging that turns a technical AR repair concept into a readable pitch video with clean pacing and UI rhythm.',
     role: 'Motion Designer / Editor',
     tools: ['After Effects', 'Figma', 'Pitch video'],
     timecode: '00:00:24:18',
-    format: 'Motion promo',
+    format: 'MG / explainer',
     image: assetUrl('assets/motion-lensfix.jpg'),
-    accent: 'ink',
+    accent: 'yellow',
+  },
+  {
+    id: '03',
+    category: 'Documentary Production',
+    title: 'A Bit of Chaoshan',
+    eyebrow: 'Documentary production',
+    location: 'Food culture story',
+    description:
+      'Narrative documentary work grounded in people, place, food culture, field production, story structure, and observed detail.',
+    role: 'Producer / Editor',
+    tools: ['Story structure', 'Field production', 'Sound mix'],
+    timecode: '00:04:12:08',
+    format: 'Documentary short',
+    image: assetUrl('assets/documentary-chaoshan.jpg'),
+    accent: 'green',
+  },
+  {
+    id: '04',
+    category: 'Food Photography',
+    title: 'Kung Fu Kitchen Food Photography',
+    eyebrow: 'Local food photography',
+    location: 'Mio / Kung Fu Kitchen',
+    description:
+      'A local restaurant still-photo set built around sushi, ramen, dark-table contrast, clean garnish detail, and menu-ready crops.',
+    role: 'Photographer / Retoucher',
+    tools: ['Panasonic G9M2', 'Food lighting', 'Color control'],
+    timecode: 'STILL / 0522',
+    format: 'Menu + social stills',
+    image: assetUrl('assets/food-ramen-three-bowls.jpg'),
+    accent: 'red',
   },
 ]
 
@@ -115,7 +99,7 @@ const capabilities = [
   {
     icon: Camera,
     title: 'Capture',
-    details: ['Cinematography', 'Food and interior lighting'],
+    details: ['Cinematography', 'Interior and food lighting'],
   },
   {
     icon: Scissors,
@@ -229,29 +213,29 @@ function HeroCollage() {
       />
 
       <HeroCard
-        className="hero-card-food"
-        image={assetUrl('assets/restaurant-sushi-avocado-roll.jpg')}
-        alt="Restaurant sushi roll food photography"
-        label="restaurant"
+        className="hero-card-monitor"
+        image={assetUrl('assets/architecture-detail.jpg')}
+        alt="Architectural detail frame from home tour production"
+        label="shoot"
         tone="red"
-        timecode="00:00:13:08"
-      />
-
-      <HeroCard
-        className="hero-card-motion"
-        image={assetUrl('assets/motion-lensfix.jpg')}
-        alt="Motion graphics frame from Lens Fix+ project"
-        label="motion"
-        tone="yellow"
         timecode="00:00:24:18"
       />
 
       <HeroCard
-        className="hero-card-commercial"
-        image={assetUrl('assets/commercial-me7.jpg')}
-        alt="Automotive commercial video still"
-        label="commercial"
-        tone="green"
+        className="hero-card-edit"
+        image={assetUrl('assets/edit-timeline-ae.jpg')}
+        alt="After Effects editing timeline for Lens Fix motion graphics"
+        label="edit"
+        tone="red"
+        timecode="00:00:31:12"
+      />
+
+      <HeroCard
+        className="hero-card-support"
+        image={assetUrl('assets/architecture-detail.jpg')}
+        alt="Bright architectural detail still"
+        label="design-driven"
+        tone="yellow"
       />
 
       <div className="edit-console" aria-label="Editing workflow labels">
@@ -382,7 +366,7 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <div className="hero-kicker">Motion / food / space / story</div>
+              <div className="hero-kicker">Motion / story / space</div>
               <h1 aria-label="Kinetic Cutboard">
                 <span>Kinetic</span>
                 <span>Cutboard</span>
@@ -391,8 +375,8 @@ function App() {
                 Boston-based video producer, shooter, editor, and content creator.
               </p>
               <p className="summary">
-                I build polished visuals for restaurants, real estate, products, and
-                short-form campaigns, from shoot planning to final export.
+                I build polished visuals for architecture, motion graphics,
+                documentaries, and commercial stories, from shoot planning to final export.
               </p>
               <div className="hero-actions">
                 <ButtonLink href={portfolioUrl} icon={ArrowRight}>
@@ -412,11 +396,11 @@ function App() {
           <div className="section-heading">
             <div>
               <span className="section-eyebrow">Selected work</span>
-              <h2>5 cuts</h2>
+              <h2>4 cuts</h2>
             </div>
             <p>
-              A focused mix of restaurant content, food photography, real estate video,
-              commercial production, and short-form motion.
+              Work organized around the same portfolio structure as my Google Drive,
+              with one additional local food photography case.
             </p>
             <div className="filter-tabs" aria-label="Project filters">
               {filters.map((filter) => (
@@ -502,7 +486,7 @@ function App() {
           <div className="contact-panel">
             <p>
               Open to co-op and creative media opportunities in Boston, especially
-              video editing, content production, restaurant media, and branded video.
+              video production, editing, motion graphics, documentary, and branded video.
             </p>
             <button className="contact-link" type="button" onClick={copyEmail}>
               <EnvelopeSimple size={20} weight="bold" />
@@ -527,10 +511,10 @@ function App() {
           </div>
           <div className="contact-media">
             <img
-              src={assetUrl('assets/food-ramen-three-bowls.jpg')}
-              alt="Restaurant ramen food photography used as a portfolio closing still"
+              src={assetUrl('assets/architecture-detail.jpg')}
+              alt="Architectural detail still used as a portfolio closing image"
             />
-            <span>Boston content creator / video editor</span>
+            <span>Boston video producer / editor</span>
           </div>
         </section>
       </main>
