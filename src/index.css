@@ -687,6 +687,27 @@ h1 span {
   line-height: 1.7;
 }
 
+.archive-heading {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(340px, 1fr) auto;
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 30px;
+}
+
+.archive-heading h2 {
+  margin-top: 10px;
+  font-size: 4.55rem;
+  line-height: 0.86;
+}
+
+.archive-heading p {
+  margin: 0;
+  max-width: 620px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .filter-tabs {
   display: flex;
   gap: 8px;
@@ -958,6 +979,155 @@ h1 span {
   transform: translate(5px, -5px);
 }
 
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.archive-card {
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba(27, 26, 23, 0.16);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 249, 234, 0.58);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.archive-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(27, 26, 23, 0.4);
+  background: rgba(255, 249, 234, 0.92);
+  box-shadow: var(--shadow-sm);
+}
+
+.archive-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+}
+
+.archive-media img,
+.archive-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 360ms ease, filter 360ms ease;
+}
+
+.archive-card:hover .archive-media img,
+.archive-card:hover .archive-media video {
+  transform: scale(1.05);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.archive-index,
+.archive-year,
+.archive-play {
+  position: absolute;
+  z-index: 4;
+}
+
+.archive-index,
+.archive-year {
+  padding: 7px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(27, 26, 23, 0.82);
+  color: white;
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.66rem;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.archive-index {
+  left: 10px;
+  top: 10px;
+}
+
+.archive-year {
+  right: 10px;
+  bottom: 10px;
+}
+
+.archive-play {
+  left: 50%;
+  top: 50%;
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 50%;
+  background: rgba(27, 26, 23, 0.44);
+  color: white;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(8px);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.archive-card:hover .archive-play {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: rgba(23, 86, 214, 0.72);
+}
+
+.archive-copy {
+  min-height: 138px;
+  padding: 17px 17px 18px;
+}
+
+.archive-copy > span {
+  display: block;
+  color: var(--blue);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.65rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.tone-red .archive-copy > span {
+  color: var(--red);
+}
+
+.tone-yellow .archive-copy > span {
+  color: #8a6500;
+}
+
+.tone-green .archive-copy > span {
+  color: var(--green);
+}
+
+.tone-ink .archive-copy > span {
+  color: var(--ink);
+}
+
+.archive-copy h3 {
+  margin: 10px 0 0;
+  color: var(--ink);
+  font-size: 1.06rem;
+  line-height: 1.16;
+}
+
+.archive-copy div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.archive-copy small {
+  padding: 6px 8px;
+  border: 1px solid rgba(27, 26, 23, 0.16);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1;
+  font-weight: 800;
+}
+
 .capability-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1178,7 +1348,8 @@ h1 span {
   }
 
   .section-heading,
-  .section-heading.compact {
+  .section-heading.compact,
+  .archive-heading {
     grid-template-columns: 1fr;
     align-items: start;
   }
@@ -1202,6 +1373,10 @@ h1 span {
   }
 
   .capability-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .archive-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -1346,6 +1521,10 @@ h1 span {
     font-size: 4rem;
   }
 
+  .archive-heading h2 {
+    font-size: 3.8rem;
+  }
+
   .project-row {
     grid-template-columns: 1fr;
   }
@@ -1374,6 +1553,18 @@ h1 span {
 
   .project-media {
     margin: 0 10px 10px;
+  }
+
+  .archive-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-card {
+    border-radius: var(--radius-md);
+  }
+
+  .archive-copy {
+    min-height: 0;
   }
 
   .capability-grid,

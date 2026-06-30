@@ -103,6 +103,141 @@ const projects = [
   },
 ]
 
+const archiveWorks = [
+  {
+    id: 'A01',
+    title: 'Fotile Chengdu Home Tour',
+    category: 'Architectural & Home Tour Videos',
+    format: 'Interior story',
+    role: 'Producer / Shooter / Editor',
+    year: 'PChouse',
+    image: assetUrl('assets/archive-home-fotile.jpg'),
+    video: assetUrl('assets/archive-home-fotile.mp4'),
+    accent: 'blue',
+  },
+  {
+    id: 'A02',
+    title: 'Suzhou Residential Walkthrough',
+    category: 'Architectural & Home Tour Videos',
+    format: 'Home tour cut',
+    role: 'Camera / Edit',
+    year: 'PChouse',
+    image: assetUrl('assets/archive-home-suzhou.jpg'),
+    video: assetUrl('assets/archive-home-suzhou.mp4'),
+    accent: 'blue',
+  },
+  {
+    id: 'A03',
+    title: 'Brand Campaign Animated Ad',
+    category: 'Motion Graphics (MG) Animations',
+    format: 'Animated social ad',
+    role: 'Motion Design',
+    year: '2023',
+    image: assetUrl('assets/archive-mg-brand.jpg'),
+    video: assetUrl('assets/archive-mg-brand.mp4'),
+    accent: 'yellow',
+  },
+  {
+    id: 'A04',
+    title: 'Co-branded Credit Card Animation',
+    category: 'Motion Graphics (MG) Animations',
+    format: 'Character / app promo',
+    role: 'Motion Design',
+    year: '2023',
+    image: assetUrl('assets/archive-mg-credit-card.jpg'),
+    video: assetUrl('assets/archive-mg-credit-card.mp4'),
+    accent: 'yellow',
+  },
+  {
+    id: 'A05',
+    title: 'ME7 SUV TV Advertisement',
+    category: 'TVC / Commercial Video',
+    format: 'Automotive TVC',
+    role: 'Director / Editor',
+    year: 'TVC',
+    image: assetUrl('assets/archive-tvc-me7.jpg'),
+    video: assetUrl('assets/archive-tvc-me7.mp4'),
+    accent: 'red',
+  },
+  {
+    id: 'A06',
+    title: 'XPeng Automotive Campaign',
+    category: 'TVC / Commercial Video',
+    format: 'Auto feature film',
+    role: 'Commercial Video',
+    year: 'TVC',
+    image: assetUrl('assets/archive-tvc-xpeng.jpg'),
+    video: assetUrl('assets/archive-tvc-xpeng.mp4'),
+    accent: 'red',
+  },
+  {
+    id: 'A07',
+    title: 'Guangcai Heritage Story',
+    category: 'Documentary Production',
+    format: 'Culture profile',
+    role: 'Producer / Editor',
+    year: 'Documentary',
+    image: assetUrl('assets/archive-doc-guangcai.jpg'),
+    video: assetUrl('assets/archive-doc-guangcai.mp4'),
+    accent: 'green',
+  },
+  {
+    id: 'A08',
+    title: 'Cantonese Opera Portrait',
+    category: 'Documentary Production',
+    format: 'Artist interview',
+    role: 'Producer / Editor',
+    year: 'Documentary',
+    image: assetUrl('assets/archive-doc-portrait.jpg'),
+    video: assetUrl('assets/archive-doc-portrait.mp4'),
+    accent: 'green',
+  },
+  {
+    id: 'A09',
+    title: 'Night Harbor Aerial Reel',
+    category: 'Aerial / Drone Footage',
+    format: 'Drone montage',
+    role: 'Aerial Footage',
+    year: 'Drone',
+    image: assetUrl('assets/archive-drone-harbor.jpg'),
+    video: assetUrl('assets/archive-drone-harbor.mp4'),
+    accent: 'ink',
+  },
+  {
+    id: 'A10',
+    title: 'City Aerial Movement',
+    category: 'Aerial / Drone Footage',
+    format: 'Landscape / city',
+    role: 'Aerial Footage',
+    year: 'Drone',
+    image: assetUrl('assets/archive-drone-city.jpg'),
+    video: assetUrl('assets/archive-drone-city.mp4'),
+    accent: 'ink',
+  },
+  {
+    id: 'A11',
+    title: 'Guangzhou City Promotional Film',
+    category: 'Promotional / Event Coverage',
+    format: 'City promo',
+    role: 'Producer / Editor',
+    year: 'Promo',
+    image: assetUrl('assets/archive-promo-guangzhou.jpg'),
+    video: assetUrl('assets/archive-promo-guangzhou.mp4'),
+    accent: 'blue',
+  },
+  {
+    id: 'A12',
+    title: 'Nansha Film Forum Coverage',
+    category: 'Promotional / Event Coverage',
+    format: 'Event recap',
+    role: 'Camera / Edit',
+    year: 'Event',
+    image: assetUrl('assets/archive-event-nansha.jpg'),
+    video: assetUrl('assets/archive-event-nansha.mp4'),
+    accent: 'red',
+  },
+]
+
 const capabilities = [
   {
     icon: Camera,
@@ -182,7 +317,7 @@ function Label({ children, tone = 'blue' }) {
   return <span className={`cut-label label-${tone}`}>{children}</span>
 }
 
-function MediaSurface({ video, image, alt, eager = false }) {
+function MediaSurface({ video, image, alt, eager = false, posterLoading }) {
   const mediaRef = useRef(null)
   const videoRef = useRef(null)
   const [shouldLoadVideo, setShouldLoadVideo] = useState(eager)
@@ -268,7 +403,7 @@ function MediaSurface({ video, image, alt, eager = false }) {
       ref={mediaRef}
       src={image}
       alt={alt}
-      loading={eager ? 'eager' : 'lazy'}
+      loading={posterLoading || (eager ? 'eager' : 'lazy')}
       decoding="async"
     />
   )
@@ -438,6 +573,35 @@ function ProjectRow({ project }) {
   )
 }
 
+function ArchiveCard({ item }) {
+  return (
+    <a className={`archive-card tone-${item.accent}`} href={portfolioUrl} target="_blank" rel="noreferrer">
+      <div className="archive-media">
+        <MediaSurface
+          video={item.video}
+          image={item.image}
+          alt={`${item.title} moving archive preview`}
+          posterLoading="eager"
+        />
+        <span className="video-vignette" aria-hidden="true" />
+        <span className="archive-index">{item.id}</span>
+        <span className="archive-year">{item.year}</span>
+        <span className="archive-play" aria-hidden="true">
+          <Play size={13} weight="fill" />
+        </span>
+      </div>
+      <div className="archive-copy">
+        <span>{item.category}</span>
+        <h3>{item.title}</h3>
+        <div>
+          <small>{item.format}</small>
+          <small>{item.role}</small>
+        </div>
+      </div>
+    </a>
+  )
+}
+
 function App() {
   const [activeFilter, setActiveFilter] = useState('All')
   const [copied, setCopied] = useState(false)
@@ -531,7 +695,7 @@ function App() {
           <div className="section-heading">
             <div>
               <span className="section-eyebrow">Selected work</span>
-              <h2>4 cuts</h2>
+              <h2>4 flagship cuts</h2>
             </div>
             <p>
               Work organized around the same portfolio structure as my Google Drive,
@@ -560,6 +724,29 @@ function App() {
           <div className="project-list">
             {visibleProjects.map((project) => (
               <ProjectRow key={project.id} project={project} />
+            ))}
+          </div>
+        </section>
+
+        <section className="archive-section section-rule">
+          <div className="archive-heading">
+            <div>
+              <span className="section-eyebrow">Production archive</span>
+              <h2>12 more pieces</h2>
+            </div>
+            <p>
+              A broader scan of commercial, home tour, motion graphics, documentary,
+              aerial, promotional, and event work. These stay compact so the page reads
+              like a curated reel, not a file dump.
+            </p>
+            <ButtonLink href={portfolioUrl} icon={ArrowUpRight} variant="outline">
+              Open full drive
+            </ButtonLink>
+          </div>
+
+          <div className="archive-grid">
+            {archiveWorks.map((item) => (
+              <ArchiveCard key={item.id} item={item} />
             ))}
           </div>
         </section>
