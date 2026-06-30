@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -24,69 +24,200 @@ const resumeUrl = assetUrl('assets/resume-mingzi-ye.pdf')
 const email = 'ye.mingz@northeastern.edu'
 const linkedinUrl = 'https://www.linkedin.com/in/MingziYe'
 
-const filters = [
-  'All',
-  'Architectural & Home Tour Videos',
-  'Motion Graphics (MG) Animations',
-  'Documentary Production',
-  'Food Photography',
+const categories = [
+  {
+    id: 'featured',
+    label: 'Featured',
+    headline: 'Featured cuts',
+    description:
+      'One strongest representative from each production category, selected for a fast scan of range, taste, and execution.',
+    accent: 'ink',
+  },
+  {
+    id: 'architecture',
+    label: 'Architecture',
+    headline: 'Architecture reel',
+    description:
+      'Interior films and home tour work built around light, space, material rhythm, and editorial camera movement.',
+    accent: 'blue',
+  },
+  {
+    id: 'mg',
+    label: 'MG Animation',
+    headline: 'MG animation',
+    description:
+      'Motion-led explainers, campaign animations, UI storytelling, and animated social formats.',
+    accent: 'yellow',
+  },
+  {
+    id: 'documentary',
+    label: 'Documentary',
+    headline: 'Documentary work',
+    description:
+      'Culture, food, craft, and character-driven stories shaped through field production and editorial structure.',
+    accent: 'green',
+  },
+  {
+    id: 'drone',
+    label: 'Drone',
+    headline: 'Drone footage',
+    description:
+      'Aerial movement, city texture, night harbor atmosphere, and location-establishing production footage.',
+    accent: 'ink',
+  },
+  {
+    id: 'commercial',
+    label: 'Commercial',
+    headline: 'Commercial work',
+    description:
+      'Automotive, branded, and campaign videos made for clear product storytelling and polished delivery.',
+    accent: 'red',
+  },
+  {
+    id: 'event',
+    label: 'Event / Promo',
+    headline: 'Event and promo',
+    description:
+      'City promotional films, forum coverage, recap work, and production pieces built for public-facing communication.',
+    accent: 'blue',
+  },
+  {
+    id: 'food',
+    label: 'Food',
+    headline: 'Food photography',
+    description:
+      'Restaurant stills and animated previews for menu, social, and local business content.',
+    accent: 'red',
+  },
 ]
 
-const projects = [
+const categoryOrder = categories.filter((category) => category.id !== 'featured').map((category) => category.id)
+
+const workItems = [
   {
-    id: '01',
-    category: 'Architectural & Home Tour Videos',
+    id: 'editorial-home-tour',
+    categoryId: 'architecture',
+    category: 'Architecture',
     title: 'Editorial Home Tour Package',
     eyebrow: 'Architectural & home tour',
-    location: 'PChouse / home tour reel',
+    location: 'PChouse / Home Tour Reel',
     description:
       'High-end home tour production focused on light, material, room flow, and smooth camera movement for visually demanding interiors.',
     role: 'Producer / Shooter / Editor',
     tools: ['Sony FX3', 'Interior lighting', 'DaVinci Resolve'],
     timecode: '00:01:08:16',
     format: '16:9 portfolio film',
+    client: 'PChouse',
     image: assetUrl('assets/architecture-overhead.jpg'),
     video: assetUrl('assets/preview-architecture-home-tour.mp4'),
     previewBadge: 'Live loop',
     accent: 'blue',
+    featured: true,
   },
   {
-    id: '02',
-    category: 'Motion Graphics (MG) Animations',
+    id: 'lens-fix-motion-promo',
+    categoryId: 'mg',
+    category: 'MG Animation',
     title: 'Lens Fix+ Motion Promo',
     eyebrow: 'MG animation',
-    location: 'UI / AR concept',
+    location: 'UI / AR Concept',
     description:
       'Motion-led visual packaging that turns a technical AR repair concept into a readable pitch video with clean pacing and UI rhythm.',
     role: 'Motion Designer / Editor',
     tools: ['After Effects', 'Figma', 'Pitch video'],
     timecode: '00:00:24:18',
     format: 'MG / explainer',
+    client: 'AR concept',
     image: assetUrl('assets/motion-lensfix.jpg'),
     video: assetUrl('assets/preview-motion-lensfix.mp4'),
     previewBadge: 'Motion preview',
     accent: 'yellow',
+    featured: true,
   },
   {
-    id: '03',
-    category: 'Documentary Production',
+    id: 'a-bit-of-chaoshan',
+    categoryId: 'documentary',
+    category: 'Documentary',
     title: 'A Bit of Chaoshan',
     eyebrow: 'Documentary production',
-    location: 'Food culture story',
+    location: 'Food Culture Story',
     description:
       'Narrative documentary work grounded in people, place, food culture, field production, story structure, and observed detail.',
     role: 'Producer / Editor',
     tools: ['Story structure', 'Field production', 'Sound mix'],
     timecode: '00:04:12:08',
     format: 'Documentary short',
+    client: 'Culture story',
     image: assetUrl('assets/documentary-chaoshan.jpg'),
     video: assetUrl('assets/preview-documentary-chaoshan.mp4'),
     previewBadge: 'Scene preview',
     accent: 'green',
+    featured: true,
   },
   {
-    id: '04',
-    category: 'Food Photography',
+    id: 'night-harbor-aerial-reel',
+    categoryId: 'drone',
+    category: 'Drone',
+    title: 'Night Harbor Aerial Reel',
+    eyebrow: 'Aerial / drone footage',
+    location: 'Night Harbor',
+    description:
+      'Atmospheric aerial footage using movement, scale, and night lighting to establish location and cinematic energy.',
+    role: 'Aerial Footage',
+    tools: ['Drone montage', 'Night city texture', 'Location footage'],
+    timecode: '00:00:12:04',
+    format: 'Drone montage',
+    client: 'Drone reel',
+    image: assetUrl('assets/archive-drone-harbor.jpg'),
+    video: assetUrl('assets/archive-drone-harbor.mp4'),
+    previewBadge: 'Aerial loop',
+    accent: 'ink',
+    featured: true,
+  },
+  {
+    id: 'me7-suv-tvc',
+    categoryId: 'commercial',
+    category: 'Commercial',
+    title: 'ME7 SUV TV Advertisement',
+    eyebrow: 'TVC / commercial video',
+    location: 'Automotive Campaign',
+    description:
+      'Automotive commercial work shaped around product detail, driver experience, and polished campaign pacing.',
+    role: 'Director / Editor',
+    tools: ['Commercial direction', 'Automotive detail', 'Final edit'],
+    timecode: '00:00:18:12',
+    format: 'Automotive TVC',
+    client: 'ME7 SUV',
+    image: assetUrl('assets/archive-tvc-me7.jpg'),
+    video: assetUrl('assets/archive-tvc-me7.mp4'),
+    previewBadge: 'TVC preview',
+    accent: 'red',
+    featured: true,
+  },
+  {
+    id: 'guangzhou-city-promo',
+    categoryId: 'event',
+    category: 'Event / Promo',
+    title: 'Guangzhou City Promotional Film',
+    eyebrow: 'Promotional / event coverage',
+    location: 'City Promo',
+    description:
+      'Public-facing promotional film work combining city texture, event rhythm, and polished institutional storytelling.',
+    role: 'Producer / Editor',
+    tools: ['City promo', 'Editorial structure', 'Delivery'],
+    timecode: '00:02:30:08',
+    format: 'City promo',
+    client: 'Guangzhou',
+    image: assetUrl('assets/archive-promo-guangzhou.jpg'),
+    video: assetUrl('assets/archive-promo-guangzhou.mp4'),
+    previewBadge: 'Promo loop',
+    accent: 'blue',
+    featured: true,
+  },
+  {
+    id: 'kung-fu-kitchen-food',
+    categoryId: 'food',
+    category: 'Food',
     title: 'Kung Fu Kitchen Food Photography',
     eyebrow: 'Local food photography',
     location: 'Mio / Kung Fu Kitchen',
@@ -96,142 +227,117 @@ const projects = [
     tools: ['Panasonic G9M2', 'Food lighting', 'Color control'],
     timecode: 'STILL / 0522',
     format: 'Menu + social stills',
+    client: 'Kung Fu Kitchen',
     image: assetUrl('assets/food-ramen-three-bowls.jpg'),
     video: assetUrl('assets/preview-food-photography.mp4'),
     previewBadge: 'Animated stills',
     accent: 'red',
+    featured: true,
   },
-]
-
-const archiveWorks = [
   {
-    id: 'A01',
+    id: 'fotile-chengdu-home-tour',
+    categoryId: 'architecture',
+    category: 'Architecture',
     title: 'Fotile Chengdu Home Tour',
-    category: 'Architectural & Home Tour Videos',
     format: 'Interior story',
     role: 'Producer / Shooter / Editor',
-    year: 'PChouse',
+    client: 'PChouse',
     image: assetUrl('assets/archive-home-fotile.jpg'),
     video: assetUrl('assets/archive-home-fotile.mp4'),
     accent: 'blue',
   },
   {
-    id: 'A02',
+    id: 'suzhou-residential-walkthrough',
+    categoryId: 'architecture',
+    category: 'Architecture',
     title: 'Suzhou Residential Walkthrough',
-    category: 'Architectural & Home Tour Videos',
     format: 'Home tour cut',
     role: 'Camera / Edit',
-    year: 'PChouse',
+    client: 'PChouse',
     image: assetUrl('assets/archive-home-suzhou.jpg'),
     video: assetUrl('assets/archive-home-suzhou.mp4'),
     accent: 'blue',
   },
   {
-    id: 'A03',
+    id: 'brand-campaign-animation',
+    categoryId: 'mg',
+    category: 'MG Animation',
     title: 'Brand Campaign Animated Ad',
-    category: 'Motion Graphics (MG) Animations',
     format: 'Animated social ad',
     role: 'Motion Design',
-    year: '2023',
+    client: '2023 campaign',
     image: assetUrl('assets/archive-mg-brand.jpg'),
     video: assetUrl('assets/archive-mg-brand.mp4'),
     accent: 'yellow',
   },
   {
-    id: 'A04',
+    id: 'credit-card-animation',
+    categoryId: 'mg',
+    category: 'MG Animation',
     title: 'Co-branded Credit Card Animation',
-    category: 'Motion Graphics (MG) Animations',
     format: 'Character / app promo',
     role: 'Motion Design',
-    year: '2023',
+    client: '2023 campaign',
     image: assetUrl('assets/archive-mg-credit-card.jpg'),
     video: assetUrl('assets/archive-mg-credit-card.mp4'),
     accent: 'yellow',
   },
   {
-    id: 'A05',
-    title: 'ME7 SUV TV Advertisement',
-    category: 'TVC / Commercial Video',
-    format: 'Automotive TVC',
-    role: 'Director / Editor',
-    year: 'TVC',
-    image: assetUrl('assets/archive-tvc-me7.jpg'),
-    video: assetUrl('assets/archive-tvc-me7.mp4'),
-    accent: 'red',
-  },
-  {
-    id: 'A06',
+    id: 'xpeng-automotive-campaign',
+    categoryId: 'commercial',
+    category: 'Commercial',
     title: 'XPeng Automotive Campaign',
-    category: 'TVC / Commercial Video',
     format: 'Auto feature film',
     role: 'Commercial Video',
-    year: 'TVC',
+    client: 'XPeng',
     image: assetUrl('assets/archive-tvc-xpeng.jpg'),
     video: assetUrl('assets/archive-tvc-xpeng.mp4'),
     accent: 'red',
   },
   {
-    id: 'A07',
+    id: 'guangcai-heritage-story',
+    categoryId: 'documentary',
+    category: 'Documentary',
     title: 'Guangcai Heritage Story',
-    category: 'Documentary Production',
     format: 'Culture profile',
     role: 'Producer / Editor',
-    year: 'Documentary',
+    client: 'Documentary',
     image: assetUrl('assets/archive-doc-guangcai.jpg'),
     video: assetUrl('assets/archive-doc-guangcai.mp4'),
     accent: 'green',
   },
   {
-    id: 'A08',
+    id: 'cantonese-opera-portrait',
+    categoryId: 'documentary',
+    category: 'Documentary',
     title: 'Cantonese Opera Portrait',
-    category: 'Documentary Production',
     format: 'Artist interview',
     role: 'Producer / Editor',
-    year: 'Documentary',
+    client: 'Documentary',
     image: assetUrl('assets/archive-doc-portrait.jpg'),
     video: assetUrl('assets/archive-doc-portrait.mp4'),
     accent: 'green',
   },
   {
-    id: 'A09',
-    title: 'Night Harbor Aerial Reel',
-    category: 'Aerial / Drone Footage',
-    format: 'Drone montage',
-    role: 'Aerial Footage',
-    year: 'Drone',
-    image: assetUrl('assets/archive-drone-harbor.jpg'),
-    video: assetUrl('assets/archive-drone-harbor.mp4'),
-    accent: 'ink',
-  },
-  {
-    id: 'A10',
+    id: 'city-aerial-movement',
+    categoryId: 'drone',
+    category: 'Drone',
     title: 'City Aerial Movement',
-    category: 'Aerial / Drone Footage',
     format: 'Landscape / city',
     role: 'Aerial Footage',
-    year: 'Drone',
+    client: 'Drone reel',
     image: assetUrl('assets/archive-drone-city.jpg'),
     video: assetUrl('assets/archive-drone-city.mp4'),
     accent: 'ink',
   },
   {
-    id: 'A11',
-    title: 'Guangzhou City Promotional Film',
-    category: 'Promotional / Event Coverage',
-    format: 'City promo',
-    role: 'Producer / Editor',
-    year: 'Promo',
-    image: assetUrl('assets/archive-promo-guangzhou.jpg'),
-    video: assetUrl('assets/archive-promo-guangzhou.mp4'),
-    accent: 'blue',
-  },
-  {
-    id: 'A12',
+    id: 'nansha-film-forum',
+    categoryId: 'event',
+    category: 'Event / Promo',
     title: 'Nansha Film Forum Coverage',
-    category: 'Promotional / Event Coverage',
     format: 'Event recap',
     role: 'Camera / Edit',
-    year: 'Event',
+    client: 'Film forum',
     image: assetUrl('assets/archive-event-nansha.jpg'),
     video: assetUrl('assets/archive-event-nansha.mp4'),
     accent: 'red',
@@ -297,6 +403,38 @@ const experience = [
     note: 'Created 20+ mobile-first automotive campaign videos for Benz and Peugeot on Douyin / TikTok.',
   },
 ]
+
+const workContainerVariants = {
+  hidden: { opacity: 0, x: 26, scale: 0.985, filter: 'blur(6px)' },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.34,
+      ease: [0.22, 1, 0.36, 1],
+      staggerChildren: 0.055,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: -22,
+    scale: 0.99,
+    filter: 'blur(5px)',
+    transition: { duration: 0.18, ease: [0.4, 0, 1, 1] },
+  },
+}
+
+const workItemVariants = {
+  hidden: { opacity: 0, y: 18, rotate: -0.35 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] },
+  },
+}
 
 function ButtonLink({ href, children, variant = 'dark', icon: Icon, download }) {
   return (
@@ -523,16 +661,17 @@ function HeroCollage() {
   )
 }
 
-function ProjectRow({ project }) {
+function ProjectRow({ project, displayNumber }) {
   return (
     <motion.a
       className={`project-row tone-${project.accent}`}
       href={portfolioUrl}
       target="_blank"
       rel="noreferrer"
+      variants={workItemVariants}
     >
       <div className="project-number">
-        <span>{project.id}</span>
+        <span>{displayNumber}</span>
         <small>{project.category}</small>
       </div>
 
@@ -573,9 +712,15 @@ function ProjectRow({ project }) {
   )
 }
 
-function ArchiveCard({ item }) {
+function ArchiveCard({ item, displayNumber }) {
   return (
-    <a className={`archive-card tone-${item.accent}`} href={portfolioUrl} target="_blank" rel="noreferrer">
+    <motion.a
+      className={`archive-card tone-${item.accent}`}
+      href={portfolioUrl}
+      target="_blank"
+      rel="noreferrer"
+      variants={workItemVariants}
+    >
       <div className="archive-media">
         <MediaSurface
           video={item.video}
@@ -584,8 +729,8 @@ function ArchiveCard({ item }) {
           posterLoading="eager"
         />
         <span className="video-vignette" aria-hidden="true" />
-        <span className="archive-index">{item.id}</span>
-        <span className="archive-year">{item.year}</span>
+        <span className="archive-index">{displayNumber}</span>
+        <span className="archive-year">{item.client}</span>
         <span className="archive-play" aria-hidden="true">
           <Play size={13} weight="fill" />
         </span>
@@ -598,18 +743,40 @@ function ArchiveCard({ item }) {
           <small>{item.role}</small>
         </div>
       </div>
-    </a>
+    </motion.a>
   )
 }
 
 function App() {
-  const [activeFilter, setActiveFilter] = useState('All')
+  const [activeCategory, setActiveCategory] = useState('featured')
   const [copied, setCopied] = useState(false)
 
-  const visibleProjects = useMemo(() => {
-    if (activeFilter === 'All') return projects
-    return projects.filter((project) => project.category === activeFilter)
-  }, [activeFilter])
+  const currentCategory = useMemo(
+    () => categories.find((category) => category.id === activeCategory) || categories[0],
+    [activeCategory],
+  )
+
+  const categoryCounts = useMemo(() => {
+    const counts = workItems.reduce((acc, item) => {
+      acc[item.categoryId] = (acc[item.categoryId] || 0) + 1
+      return acc
+    }, {})
+
+    counts.featured = categoryOrder.length
+    return counts
+  }, [])
+
+  const visibleWorkItems = useMemo(() => {
+    if (activeCategory === 'featured') {
+      return categoryOrder
+        .map((categoryId) => workItems.find((item) => item.categoryId === categoryId && item.featured))
+        .filter(Boolean)
+    }
+
+    return workItems.filter((item) => item.categoryId === activeCategory)
+  }, [activeCategory])
+
+  const isFeaturedView = activeCategory === 'featured'
 
   const copyEmail = () => {
     setCopied(true)
@@ -692,24 +859,43 @@ function App() {
         </section>
 
         <section id="work" className="work-section section-rule">
-          <div className="section-heading">
+          <div className={`section-heading work-browser-heading tone-${currentCategory.accent}`}>
             <div>
               <span className="section-eyebrow">Selected work</span>
-              <h2>4 flagship cuts</h2>
-            </div>
-            <p>
-              Work organized around the same portfolio structure as my Google Drive,
-              with one additional local food photography case.
-            </p>
-            <div className="filter-tabs" aria-label="Project filters">
-              {filters.map((filter) => (
-                <button
-                  key={filter}
-                  className={activeFilter === filter ? 'active' : ''}
-                  onClick={() => setActiveFilter(filter)}
-                  type="button"
+              <AnimatePresence mode="wait">
+                <motion.h2
+                  key={currentCategory.headline}
+                  initial={{ opacity: 0, y: 16, rotate: -0.7 }}
+                  animate={{ opacity: 1, y: 0, rotate: 0 }}
+                  exit={{ opacity: 0, y: -12, rotate: 0.5 }}
+                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {filter}
+                  {currentCategory.headline}
+                </motion.h2>
+              </AnimatePresence>
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={currentCategory.description}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.22 }}
+              >
+                {currentCategory.description}
+              </motion.p>
+            </AnimatePresence>
+            <div className="filter-tabs" aria-label="Project filters">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  className={`tone-${category.accent} ${activeCategory === category.id ? 'active' : ''}`}
+                  onClick={() => setActiveCategory(category.id)}
+                  type="button"
+                  aria-pressed={activeCategory === category.id}
+                >
+                  <span>{category.label}</span>
+                  <small>{categoryCounts[category.id] || 0}</small>
                 </button>
               ))}
             </div>
@@ -721,33 +907,40 @@ function App() {
             />
           </div>
 
-          <div className="project-list">
-            {visibleProjects.map((project) => (
-              <ProjectRow key={project.id} project={project} />
-            ))}
-          </div>
-        </section>
-
-        <section className="archive-section section-rule">
-          <div className="archive-heading">
-            <div>
-              <span className="section-eyebrow">Production archive</span>
-              <h2>12 more pieces</h2>
+          <div className={`work-results tone-${currentCategory.accent}`}>
+            <div className="work-signal" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <strong>{isFeaturedView ? 'curated range' : 'category scan'}</strong>
             </div>
-            <p>
-              A broader scan of commercial, home tour, motion graphics, documentary,
-              aerial, promotional, and event work. These stay compact so the page reads
-              like a curated reel, not a file dump.
-            </p>
-            <ButtonLink href={portfolioUrl} icon={ArrowUpRight} variant="outline">
-              Open full drive
-            </ButtonLink>
-          </div>
 
-          <div className="archive-grid">
-            {archiveWorks.map((item) => (
-              <ArchiveCard key={item.id} item={item} />
-            ))}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCategory}
+                className={isFeaturedView ? 'project-list featured-list' : 'archive-grid work-grid'}
+                variants={workContainerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                {visibleWorkItems.map((item, index) =>
+                  isFeaturedView ? (
+                    <ProjectRow
+                      key={item.id}
+                      project={item}
+                      displayNumber={String(index + 1).padStart(2, '0')}
+                    />
+                  ) : (
+                    <ArchiveCard
+                      key={item.id}
+                      item={item}
+                      displayNumber={String(index + 1).padStart(2, '0')}
+                    />
+                  ),
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </section>
 
