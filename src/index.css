@@ -1772,21 +1772,21 @@ h1 span {
   }
 
   .filter-tabs {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding: 2px 0 10px;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-  }
-
-  .filter-tabs::-webkit-scrollbar {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    justify-content: stretch;
+    overflow: visible;
+    padding: 0;
   }
 
   .filter-tabs button {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 40px;
+    padding-inline: 12px 9px;
+    font-size: 0.62rem;
   }
 
   .section-heading h2 {

@@ -45,6 +45,7 @@ Do not add another dominant accent color without replacing one of the four exist
 - Single-category views show all pieces in that category with the same visual language.
 - Project numbers should be lively and colorful. Avoid long runs of black number panels in `Featured`.
 - Category switching should feel like MG animation: quick title movement, colored sweep line, staggered project entry, and small count feedback.
+- On mobile, every category must be visibly discoverable without relying on a hidden horizontal scroll rail.
 - Respect `prefers-reduced-motion`; reduced motion users should get stable content changes without decorative movement.
 
 ## Documentation Practice
@@ -66,3 +67,11 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 - Rules added: hero must have one dominant media anchor; `Featured` project numbers must use controlled blue/yellow/green/red rhythm instead of repeated black panels.
 - Verification evidence: `qa/visual-system-2026-06-30/desktop-hero.png`, `desktop-work.png`, `desktop-full.png`, `mobile-hero.png`, `mobile-full.png`.
 - QA status: local category click QA passed for all 8 filters; `npm run build` passed; first-screen MP4 requests remained controlled at 4 desktop and 3 mobile.
+
+### 2026-06-30 - Mobile category discoverability
+
+- Intent: prevent mobile visitors from thinking only the first three work categories exist.
+- Areas: mobile work browser category selector.
+- Rule added: mobile category controls should use a visible multi-row layout instead of a hidden horizontal scroll rail.
+- Verification evidence: `qa/mobile-category-2026-06-30/mobile-work.png`, `mobile-full.png`.
+- QA status: 390px mobile check passed with 8 visible category buttons before the first project card, no horizontal overflow, no console errors, and no CJK DOM text.
