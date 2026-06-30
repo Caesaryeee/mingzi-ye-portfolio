@@ -25,7 +25,9 @@ Current code source: `src/index.css`.
 - Paper: `--paper #f4efe2`, `--paper-soft #fff9ea`, `--paper-warm #eadfc8`.
 - Ink: `--ink #1b1a17`, `--ink-soft #2b2924`, `--muted #615d52`.
 - Accents: `--blue #1756d6`, `--yellow #e4bd2b`, `--red #d94a37`, `--green #387a51`.
+- Featured-only secondary accents: `--teal #0b7d78`, `--plum #5b2a59`, `--orange #d87022`, `--coral #e35a49`. Use these only to prevent repeated project-number panels in the Featured view; do not use them for category filters.
 - Radius: small labels use `--radius-sm`; media and project strips use `--radius-md` or `--radius-lg`; buttons and tags use `--radius-pill`.
+- Media radius: use `--radius-video` for all moving preview surfaces so hero, Featured rows, and archive thumbnails share the same rounded-corner language.
 - Type: `Bebas Neue` for display, `Inter` for body, `IBM Plex Mono` for technical labels.
 
 Do not add another dominant accent color without replacing one of the four existing accents. Do not make a full section monochrome unless it is being used as a deliberate contrast beat.
@@ -59,6 +61,14 @@ External practice references:
 For this site, the lightweight version is this Markdown file plus screenshots in `qa/`. Each visual change should update the change log below with the intent, affected areas, and verification evidence.
 
 ## Change Log
+
+### 2026-06-30 - Product Design polish pass
+
+- Intent: address Product Design audit issues around nav edge finish, inconsistent video radius, and repeated Featured color panels.
+- Areas: sticky navigation bar, Featured project-row accent rhythm, moving media radius, archive thumbnail framing.
+- Rules added: top navigation should read as a contained paper bar, not a clipped strip; moving preview surfaces should share `--radius-video`; Featured can use secondary accents for rhythm while category filters stay on the four primary accents.
+- Verification evidence: `qa/product-design-audit-2026-06-30/`, `qa/product-design-polish-2026-06-30/`.
+- QA status: local Chrome QA passed; live verification pending deployment.
 
 ### 2026-06-30 - Hero collage declutter and truthful duration badges
 

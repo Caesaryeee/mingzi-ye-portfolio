@@ -134,6 +134,7 @@ const workItems = [
     video: assetUrl('assets/preview-architecture-home-tour.mp4'),
     previewBadge: 'Live loop',
     accent: 'blue',
+    featuredAccent: 'blue',
     featured: true,
   },
   {
@@ -153,6 +154,7 @@ const workItems = [
     video: assetUrl('assets/preview-motion-lensfix.mp4'),
     previewBadge: 'Motion preview',
     accent: 'yellow',
+    featuredAccent: 'yellow',
     featured: true,
   },
   {
@@ -172,6 +174,7 @@ const workItems = [
     video: assetUrl('assets/preview-documentary-chaoshan.mp4'),
     previewBadge: 'Scene preview',
     accent: 'green',
+    featuredAccent: 'green',
     featured: true,
   },
   {
@@ -191,6 +194,7 @@ const workItems = [
     video: assetUrl('assets/archive-drone-harbor.mp4'),
     previewBadge: 'Aerial loop',
     accent: 'red',
+    featuredAccent: 'teal',
     featured: true,
   },
   {
@@ -210,6 +214,7 @@ const workItems = [
     video: assetUrl('assets/archive-tvc-me7.mp4'),
     previewBadge: 'TVC preview',
     accent: 'red',
+    featuredAccent: 'coral',
     featured: true,
   },
   {
@@ -229,6 +234,7 @@ const workItems = [
     video: assetUrl('assets/archive-promo-guangzhou.mp4'),
     previewBadge: 'Promo loop',
     accent: 'blue',
+    featuredAccent: 'plum',
     featured: true,
   },
   {
@@ -248,6 +254,7 @@ const workItems = [
     video: assetUrl('assets/preview-food-photography.mp4'),
     previewBadge: 'Animated stills',
     accent: 'yellow',
+    featuredAccent: 'orange',
     featured: true,
   },
   {
@@ -732,7 +739,7 @@ function HeroCollage() {
 function ProjectRow({ project, displayNumber }) {
   return (
     <motion.a
-      className={`project-row tone-${project.accent}`}
+      className={`project-row tone-${project.featuredAccent || project.accent}`}
       href={portfolioUrl}
       target="_blank"
       rel="noreferrer"
