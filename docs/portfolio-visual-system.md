@@ -68,7 +68,7 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 - Areas: sticky navigation bar, Featured project-row accent rhythm, moving media radius, archive thumbnail framing.
 - Rules added: top navigation should read as a contained paper bar, not a clipped strip; moving preview surfaces should share `--radius-video`; Featured can use secondary accents for rhythm while category filters stay on the four primary accents.
 - Verification evidence: `qa/product-design-audit-2026-06-30/`, `qa/product-design-polish-2026-06-30/`.
-- QA status: local Chrome QA passed; live verification pending deployment.
+- QA status: local and live Chrome QA passed; nav radius is 22px, Featured media and archive media use 22px video radius, Featured project numbers use seven distinct accent panels, Work anchor clears the sticky nav, no horizontal overflow, no console errors.
 
 ### 2026-06-30 - Hero collage declutter and truthful duration badges
 
