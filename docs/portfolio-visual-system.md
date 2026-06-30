@@ -68,7 +68,7 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 - Areas: hero collage cards, Featured work rows, category archive cards, source-duration metadata.
 - Rules added: corner duration badges must use the original portfolio video length from local source files or source records; preview-loop duration should not be shown as project duration. Non-video preview loops should use a clear non-time label.
 - Verification evidence: `qa/source-duration-2026-06-30/`.
-- QA status: local Chrome QA passed across Featured, Architecture, MG Animation, Documentary, Drone, Commercial, Event / Promo, and Food; no preview-loop durations remain in the Work section.
+- QA status: local and live Chrome QA passed across Featured, Architecture, MG Animation, Documentary, Drone, Commercial, Event / Promo, and Food; no preview-loop durations remain in the Work section.
 
 ### 2026-06-30 - Product Design polish pass
 
