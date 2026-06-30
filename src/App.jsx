@@ -182,71 +182,112 @@ function Label({ children, tone = 'blue' }) {
   return <span className={`cut-label label-${tone}`}>{children}</span>
 }
 
-function MediaSurface({ video, image, alt }) {
+function MediaSurface({ video, image, alt, eager = false }) {
+  const mediaRef = useRef(null)
   const videoRef = useRef(null)
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(eager)
 
   useEffect(() => {
     if (!video || typeof window === 'undefined') return undefined
 
-    const videoEl = videoRef.current
-    if (!videoEl) return undefined
-
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) {
-      videoEl.pause()
+      videoRef.current?.pause()
       return undefined
     }
 
-    videoEl.muted = true
     const playVideo = () => {
+      const videoEl = videoRef.current
+      if (!videoEl) return
+      videoEl.muted = true
       videoEl.play().catch(() => {
         // Some browsers delay muted autoplay until the preview is close to view.
       })
     }
+
+    const pauseVideo = () => videoRef.current?.pause()
 
     const observer =
       'IntersectionObserver' in window
         ? new IntersectionObserver(
             ([entry]) => {
               if (entry.isIntersecting) {
+                setShouldLoadVideo(true)
                 playVideo()
               } else {
-                videoEl.pause()
+                pauseVideo()
               }
             },
             { rootMargin: '180px 0px', threshold: 0.05 },
           )
         : null
 
-    observer?.observe(videoEl)
-    playVideo()
+    if (observer && mediaRef.current) {
+      observer.observe(mediaRef.current)
+    } else {
+      setShouldLoadVideo(true)
+      playVideo()
+    }
+
+    if (eager) playVideo()
 
     return () => observer?.disconnect()
-  }, [video])
+  }, [eager, shouldLoadVideo, video])
 
-  if (video) {
+  useEffect(() => {
+    if (!shouldLoadVideo) return
+    const videoEl = videoRef.current
+    if (!videoEl) return
+    videoEl.muted = true
+    videoEl.play().catch(() => {
+      // Autoplay can be deferred by the browser until the video is visible.
+    })
+  }, [shouldLoadVideo])
+
+  if (video && shouldLoadVideo) {
     return (
       <video
-        ref={videoRef}
+        ref={(node) => {
+          videoRef.current = node
+          mediaRef.current = node
+        }}
         src={video}
         poster={image}
         muted
         loop
         autoPlay
         playsInline
-        preload="metadata"
+        preload={eager ? 'auto' : 'metadata'}
         aria-label={alt}
       />
     )
   }
 
-  return <img src={image} alt={alt} />
+  return (
+    <img
+      ref={mediaRef}
+      src={image}
+      alt={alt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  )
 }
 
-function HeroCard({ className, image, video, alt, label, tone, timecode, previewLabel = 'Live preview' }) {
+function HeroCard({
+  className,
+  image,
+  video,
+  alt,
+  label,
+  tone,
+  timecode,
+  previewLabel = 'Live preview',
+  eager = false,
+}) {
   return (
     <div className={`hero-card ${className}`}>
-      <MediaSurface video={video} image={image} alt={alt} />
+      <MediaSurface video={video} image={image} alt={alt} eager={eager} />
       <span className="video-vignette" aria-hidden="true" />
       <Label tone={tone}>{label}</Label>
       <span className="live-preview">
@@ -286,6 +327,7 @@ function HeroCollage() {
         label="home tour"
         tone="blue"
         timecode="00:01:08:16"
+        eager
       />
 
       <HeroCard
@@ -297,6 +339,7 @@ function HeroCollage() {
         tone="yellow"
         timecode="00:00:24:18"
         previewLabel="MG preview"
+        eager
       />
 
       <HeroCard
@@ -308,6 +351,7 @@ function HeroCollage() {
         tone="green"
         timecode="00:00:31:12"
         previewLabel="Field footage"
+        eager
       />
 
       <HeroCard
