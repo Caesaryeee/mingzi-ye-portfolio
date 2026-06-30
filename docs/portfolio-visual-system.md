@@ -62,6 +62,14 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 
 ## Change Log
 
+### 2026-06-30 - Source-duration badge correction
+
+- Intent: correct video corner badges so they represent the full source work duration, not the compressed web preview clip duration.
+- Areas: hero collage cards, Featured work rows, category archive cards, source-duration metadata.
+- Rules added: corner duration badges must use the original portfolio video length from local source files or source records; preview-loop duration should not be shown as project duration. Non-video preview loops should use a clear non-time label.
+- Verification evidence: `qa/source-duration-2026-06-30/`.
+- QA status: local Chrome QA passed across Featured, Architecture, MG Animation, Documentary, Drone, Commercial, Event / Promo, and Food; no preview-loop durations remain in the Work section.
+
 ### 2026-06-30 - Product Design polish pass
 
 - Intent: address Product Design audit issues around nav edge finish, inconsistent video radius, and repeated Featured color panels.
@@ -72,11 +80,11 @@ For this site, the lightweight version is this Markdown file plus screenshots in
 
 ### 2026-06-30 - Hero collage declutter and truthful duration badges
 
-- Intent: make the desktop hero right side read as a clearer editorial video stage, remove the duplicated Architecture 04 sample, and replace decorative/random timecodes with real MP4 durations.
+- Intent: make the desktop hero right side read as a clearer editorial video stage, remove the duplicated Architecture 04 sample, and replace decorative/random timecodes with measured duration badges. Superseded by the source-duration correction above for the exact badge source.
 - Areas: hero collage decorative layers, removed timeline card, video duration badges, Architecture work browser entries, PChouse asset map, architecture hero preview crop.
 - Rules added: decorative paper or sticker elements may not cover a showcase video; hero metadata labels must either clarify the reel structure or be removed; video corner time badges must use measured MP4 duration in `M:SS`; duplicate project samples should stay in source records but not appear in the live work browser; hero videos should avoid embedded subtitle text when used as visual background.
 - Verification evidence: `qa/hero-declutter-2026-06-30/desktop-hero.png`, `desktop-architecture.png`, `mobile-architecture.png`.
-- QA status: local Chrome QA passed; no hero sticker/timeline card; no desktop or mobile horizontal overflow; Architecture category has 8 cards; Beijing duplicate is absent; hero durations show `0:07`; Architecture durations show `0:07` then seven `0:06` badges; no console errors.
+- QA status: local Chrome QA passed for hero layout. Duration badge values from this pass were later corrected by the source-duration badge update above.
 
 ### 2026-06-30 - Hero stage and colorful work numbering
 

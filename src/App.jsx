@@ -23,28 +23,28 @@ const assetUrl = (path) => `${import.meta.env.BASE_URL}${path}`
 const resumeUrl = assetUrl('assets/resume-mingzi-ye.pdf')
 const email = 'ye.mingz@northeastern.edu'
 const linkedinUrl = 'https://www.linkedin.com/in/MingziYe'
-const videoDurations = {
-  [assetUrl('assets/archive-doc-guangcai.mp4')]: '0:04',
-  [assetUrl('assets/archive-doc-portrait.mp4')]: '0:04',
-  [assetUrl('assets/archive-drone-city.mp4')]: '0:04',
-  [assetUrl('assets/archive-drone-harbor.mp4')]: '0:04',
-  [assetUrl('assets/archive-event-nansha.mp4')]: '0:04',
-  [assetUrl('assets/archive-home-chengdu-qingyu-design-studio.mp4')]: '0:06',
-  [assetUrl('assets/archive-home-fotile.mp4')]: '0:06',
-  [assetUrl('assets/archive-home-nature-dali-monk-design.mp4')]: '0:06',
-  [assetUrl('assets/archive-home-nature-li-youyou.mp4')]: '0:06',
-  [assetUrl('assets/archive-home-nature-wuhan-chengjun.mp4')]: '0:06',
-  [assetUrl('assets/archive-home-nature-zhou-zijian.mp4')]: '0:06',
-  [assetUrl('assets/archive-home-suzhou.mp4')]: '0:06',
-  [assetUrl('assets/archive-mg-brand.mp4')]: '0:04',
-  [assetUrl('assets/archive-mg-credit-card.mp4')]: '0:04',
-  [assetUrl('assets/archive-promo-guangzhou.mp4')]: '0:04',
-  [assetUrl('assets/archive-tvc-me7.mp4')]: '0:04',
-  [assetUrl('assets/archive-tvc-xpeng.mp4')]: '0:04',
-  [assetUrl('assets/preview-architecture-home-tour.mp4')]: '0:07',
-  [assetUrl('assets/preview-documentary-chaoshan.mp4')]: '0:07',
-  [assetUrl('assets/preview-food-photography.mp4')]: '0:07',
-  [assetUrl('assets/preview-motion-lensfix.mp4')]: '0:07',
+const sourceDurations = {
+  [assetUrl('assets/archive-doc-guangcai.mp4')]: '1:48',
+  [assetUrl('assets/archive-doc-portrait.mp4')]: '2:30',
+  [assetUrl('assets/archive-drone-city.mp4')]: '0:50',
+  [assetUrl('assets/archive-drone-harbor.mp4')]: '0:45',
+  [assetUrl('assets/archive-event-nansha.mp4')]: '3:00',
+  [assetUrl('assets/archive-home-chengdu-qingyu-design-studio.mp4')]: '6:07',
+  [assetUrl('assets/archive-home-fotile.mp4')]: '6:27',
+  [assetUrl('assets/archive-home-nature-dali-monk-design.mp4')]: '3:31',
+  [assetUrl('assets/archive-home-nature-li-youyou.mp4')]: '3:46',
+  [assetUrl('assets/archive-home-nature-wuhan-chengjun.mp4')]: '2:44',
+  [assetUrl('assets/archive-home-nature-zhou-zijian.mp4')]: '3:53',
+  [assetUrl('assets/archive-home-suzhou.mp4')]: '5:45',
+  [assetUrl('assets/archive-mg-brand.mp4')]: '0:30',
+  [assetUrl('assets/archive-mg-credit-card.mp4')]: '0:58',
+  [assetUrl('assets/archive-promo-guangzhou.mp4')]: '10:29',
+  [assetUrl('assets/archive-tvc-me7.mp4')]: '0:53',
+  [assetUrl('assets/archive-tvc-xpeng.mp4')]: '1:39',
+  [assetUrl('assets/preview-architecture-home-tour.mp4')]: '6:11',
+  [assetUrl('assets/preview-documentary-chaoshan.mp4')]: '8:47',
+  [assetUrl('assets/preview-food-photography.mp4')]: 'Photo set',
+  [assetUrl('assets/preview-motion-lensfix.mp4')]: '0:45',
 }
 
 const categories = [
@@ -634,7 +634,7 @@ function MediaSurface({ video, image, alt, eager = false, posterLoading }) {
 }
 
 function DurationBadge({ video, className = 'timecode' }) {
-  const duration = videoDurations[video]
+  const duration = sourceDurations[video]
 
   if (!duration) return null
 
