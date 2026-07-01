@@ -1,6 +1,6 @@
 # Portfolio Visual System
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ## North Star
 
@@ -61,6 +61,14 @@ External practice references:
 For this site, the lightweight version is this Markdown file plus screenshots in `qa/`. Each visual change should update the change log below with the intent, affected areas, and verification evidence.
 
 ## Change Log
+
+### 2026-07-01 - Project preview clip refresh
+
+- Intent: align selected Work preview loops with the exact source ranges requested for the portfolio site before GitHub deployment.
+- Areas: featured Architecture preview, Documentary featured preview, Event / Promo featured preview, matching poster stills, Architecture title copy, source records.
+- Asset updates: `preview-architecture-home-tour.mp4` now uses `beijing-sun-jiajing-final.mp4` from `00:00-00:10`; `preview-documentary-chaoshan.mp4` now uses `潮汕风味—粿.mp4` from `00:10-00:18`; `archive-promo-guangzhou.mp4` now uses `Guangzhou.mp4` from `00:10-00:20`.
+- Copy update: `Editorial Home Tour Package` changed to `Beijing White Residence Home Tour` to match the white residence opening sequence.
+- Verification evidence: `qa/clip-adjust-2026-07-01/`.
 
 ### 2026-06-30 - Source-duration badge correction
 

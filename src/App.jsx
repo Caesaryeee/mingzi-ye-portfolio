@@ -19,6 +19,50 @@ import {
 
 const portfolioUrl =
   'https://drive.google.com/drive/folders/1MuJUFZqs1YFckr0sgPDcskDxLzOPPNdy?usp=sharing'
+const projectDriveUrls = {
+  'editorial-home-tour':
+    'https://drive.google.com/file/d/1oD_Kn1kZJO-qbOKqELwywGOVxLETEVB-/view?usp=drive_link',
+  'fotile-chengdu-home-tour':
+    'https://drive.google.com/file/d/17OITTb5BDKD0WwzNlIEfVrR3PrWwHRF1/view?usp=drive_link',
+  'suzhou-residential-walkthrough':
+    'https://drive.google.com/file/d/1JxMnr_3nBOtdlEWp3RZX2fohaxRCHy-F/view?usp=sharing',
+  'nature-zhou-zijian-home-tour':
+    'https://drive.google.com/file/d/1KmwXTcWEZjEGiXP81JwzOrzlqQnkhYkf/view?usp=drive_link',
+  'nature-dali-monk-design-home-tour':
+    'https://drive.google.com/file/d/1z8fwyrQ0L-RKG4x1Dx7gr0j4knJCtK3J/view?usp=sharing',
+  'nature-li-youyou-apartment-tour':
+    'https://drive.google.com/file/d/1NTHA7xIhFZQS3YZAPvCb0bCLcL9Yhb8p/view?usp=drive_link',
+  'nature-wuhan-chengjun-home-tour':
+    'https://drive.google.com/file/d/1VmJDkeDW6GBfgfTUm13QahJHo2KrWWsQ/view?usp=sharing',
+  'chengdu-qingyu-design-studio-home-tour':
+    'https://drive.google.com/file/d/1Z36JFhwJj8RAEsNUMoKeMfxdW81p4wVD/view?usp=sharing',
+  'lens-fix-motion-promo':
+    'https://drive.google.com/file/d/1xLVTFTVqRzYXmCIRMPftdilAzkjW4i9W/view?usp=sharing',
+  'brand-campaign-animation':
+    'https://drive.google.com/file/d/1_wojmks9Pd097_DmRKa2RdPwrJRR_58A/view?usp=sharing',
+  'credit-card-animation':
+    'https://drive.google.com/file/d/1WWpm54XeCfMqNZOADhfPirGs0YRyU8g7/view?usp=sharing',
+  'a-bit-of-chaoshan':
+    'https://drive.google.com/file/d/1RRg2Xv3w-zLTas_paaVx7EWcNrflLN9m/view?usp=sharing',
+  'guangcai-heritage-story':
+    'https://drive.google.com/file/d/19m7Ara6BWcyiYiQ48gClbNgMphDBi0Y5/view?usp=sharing',
+  'cantonese-opera-portrait':
+    'https://drive.google.com/file/d/1jwX9WF0sB_Lek2tiHTwECvohGoJHINWq/view?usp=sharing',
+  'night-harbor-aerial-reel':
+    'https://drive.google.com/file/d/1CxrIWGYLs30QWgwxrdqzhIsEE5QO5uUr/view?usp=sharing',
+  'city-aerial-movement':
+    'https://drive.google.com/file/d/1MF446hJwQsuO2OS05KCTgFuHiBbTjFMQ/view?usp=sharing',
+  'me7-suv-tvc':
+    'https://drive.google.com/file/d/1s18paW6NZkX6oXFxf4VO2L80z9TGZAbg/view?usp=sharing',
+  'xpeng-automotive-campaign':
+    'https://drive.google.com/file/d/1tMM41LOKqyEzK9O-odcYhFQf_vaJsKsg/view?usp=sharing',
+  'guangzhou-city-promo':
+    'https://drive.google.com/file/d/1C8wJUhX-6T3pxhpZUttMlvTg09a070AV/view?usp=sharing',
+  'nansha-film-forum':
+    'https://drive.google.com/file/d/1R58UqxES8uqAK5j7PQRrjkBaP9vvWoXn/view?usp=sharing',
+  'kung-fu-kitchen-food':
+    'https://drive.google.com/file/d/1uYkm3wRf-vVj4PQdslkYSPGiwHg6fqtg/view?usp=sharing',
+}
 const assetUrl = (path) => `${import.meta.env.BASE_URL}${path}`
 const resumeUrl = assetUrl('assets/resume-mingzi-ye.pdf')
 const email = 'ye.mingz@northeastern.edu'
@@ -43,7 +87,7 @@ const sourceDurations = {
   [assetUrl('assets/archive-tvc-xpeng.mp4')]: '1:39',
   [assetUrl('assets/preview-architecture-home-tour.mp4')]: '6:11',
   [assetUrl('assets/preview-documentary-chaoshan.mp4')]: '8:47',
-  [assetUrl('assets/preview-food-photography.mp4')]: 'Photo set',
+  [assetUrl('assets/preview-food-photography.mp4')]: '1:08',
   [assetUrl('assets/preview-motion-lensfix.mp4')]: '0:45',
 }
 
@@ -121,7 +165,7 @@ const workItems = [
     id: 'editorial-home-tour',
     categoryId: 'architecture',
     category: 'Architecture',
-    title: 'Editorial Home Tour Package',
+    title: 'Beijing White Residence Home Tour',
     eyebrow: 'Architectural & home tour',
     location: 'PChouse / Home Tour Reel',
     description:
@@ -737,10 +781,12 @@ function HeroCollage() {
 }
 
 function ProjectRow({ project, displayNumber }) {
+  const projectUrl = projectDriveUrls[project.id] || portfolioUrl
+
   return (
     <motion.a
       className={`project-row tone-${project.featuredAccent || project.accent}`}
-      href={portfolioUrl}
+      href={projectUrl}
       target="_blank"
       rel="noreferrer"
       variants={workItemVariants}
@@ -788,10 +834,12 @@ function ProjectRow({ project, displayNumber }) {
 }
 
 function ArchiveCard({ item, displayNumber }) {
+  const projectUrl = projectDriveUrls[item.id] || portfolioUrl
+
   return (
     <motion.a
       className={`archive-card tone-${item.accent}`}
-      href={portfolioUrl}
+      href={projectUrl}
       target="_blank"
       rel="noreferrer"
       variants={workItemVariants}

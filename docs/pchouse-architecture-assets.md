@@ -1,6 +1,6 @@
 # PChouse Architecture Asset Map
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 Raw source folder:
 
@@ -18,12 +18,13 @@ The original Chinese source files were not renamed or modified. The English copy
 
 ## Web Clips
 
-Live web clips are silent H.264 MP4 previews generated at 960px width, about 5.5 seconds long, with matching JPG posters in `public/assets`.
+Live web clips are silent H.264 MP4 previews generated at 960px width, generally 5-10 seconds long, with matching JPG posters in `public/assets`.
 
-`beijing-sun-jiajing-final.mp4` is retained in the English filename source copy, but it is excluded from the live Architecture category because it duplicates the featured 01 home-tour sample.
+`beijing-sun-jiajing-final.mp4` is retained as the featured Architecture sample and is not repeated in the single-category Architecture archive grid.
 
 | Portfolio title | English source copy | Source duration | Web clip | Poster | Start time | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
+| Beijing White Residence Home Tour | `beijing-sun-jiajing-final.mp4` | `6:11` | `preview-architecture-home-tour.mp4` | `architecture-overhead.jpg` | `00:00:00.0` | Featured architecture preview now uses the original opening 10 seconds: white residence staircase, dining, and living-space reveal. |
 | Suzhou Residential Walkthrough | `suzhou-li-yaqin-building-26-no-subtitles.mp4` | `5:45` | `archive-home-suzhou.mp4` | `archive-home-suzhou.jpg` | `00:01:40.0` | Replaces the previous wrong Suzhou clip. |
 | Nature Zhou Zijian Home Tour | `nature-zhou-zijian.mp4` | `3:53` | `archive-home-nature-zhou-zijian.mp4` | `archive-home-nature-zhou-zijian.jpg` | `00:01:40.0` | Warm interior movement across living spaces. |
 | Nature Dali Monk Design Home Tour | `nature-dali-monk-design.mp4` | `3:31` | `archive-home-nature-dali-monk-design.mp4` | `archive-home-nature-dali-monk-design.jpg` | `00:01:00.0` | Cleaner section selected after avoiding title overlay. |
